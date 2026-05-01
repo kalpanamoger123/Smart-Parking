@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Parking System</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f8fb;
+    }
+
+    header {
+      background: #2e86de;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #1e5fa4;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #2e86de;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background: #2e86de;
+      color: white;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+    }
+
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .slot {
+      background: #4caf50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .occupied {
+      background: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smart Parking System</h1>
+  </header>
+  <nav>
+    <a href="#register">Register</a>
+    <a href="#availability">Availability</a>
+    <a href="#slots">Parking Slots</a>
+  </nav>
+  <div class="container">
+    <section class="section" id="register">
+      <h2>Registration</h2>
+      <input type="text" placeholder="Full Name" id="name" />
+      <input type="text" placeholder="Vehicle Number" id="vehicle" />
+      <select id="type">
+        <option>Select Vehicle Type</option>
+        <option>Two Wheeler</option>
+        <option>Four Wheeler</option>
+      </select>
+      <button onclick="registerUser()">Register</button>
+    </section>
+
+    <section class="section" id="availability">
+      <h2>Check Availability</h2>
+      <input type="text" placeholder="Enter Location (e.g., Zone A)" id="location" />
+      <button onclick="checkAvailability()">Check</button>
+      <div id="availabilityResult"></div>
+    </section>
+
+    <section class="section" id="slots">
+      <h2>Available Parking Slots</h2>
+      <div class="slots">
+        <div class="slot">Slot 1</div>
+        <div class="slot occupied">Slot 2</div>
+        <div class="slot">Slot 3</div>
+        <div class="slot">Slot 4</div>
+        <div class="slot occupied">Slot 5</div>
+        <div class="slot">Slot 6</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function registerUser() {
+      const name = document.getElementById('name').value;
+      const vehicle = document.getElementById('vehicle').value;
+      const type = document.getElementById('type').value;
+
+      if (!name || !vehicle || type === "Select Vehicle Type") {
+        alert("Please fill in all registration fields.");
+      } else {
+        alert(`Registered Successfully!\nName: ${name}\nVehicle: ${vehicle}\nType: ${type}`);
+      }
+    }
+
+    function checkAvailability() {
+      const location = document.getElementById('location').value;
+      const resultDiv = document.getElementById('availabilityResult');
+
+      if (!location) {
+        alert("Please enter a location.");
+        resultDiv.innerHTML = '';
+      } else {
+        resultDiv.innerHTML = `<p style="color: green; font-weight: bold;">5 slots available in ${location}.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
